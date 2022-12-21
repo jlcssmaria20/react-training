@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose-sm {
+  @apply text-xs font-medium text-gray-700;
+}
+
+.prose-md {
+  @apply text-sm font-medium text-gray-700;
+}
+
+.prose-lg {
+  @apply text-base font-medium text-gray-700;
+}
