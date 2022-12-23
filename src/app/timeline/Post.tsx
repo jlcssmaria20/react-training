@@ -2,38 +2,32 @@
 
 import { trpcHook } from '@utils/trpcHook'
 import { useCallback, useMemo, useState } from 'react'
+import {useSearchParams} from 'next/navigation'
 import Feed from './Feed'
 
 
-
-export const Post =  (
-  
-    props
-  
-) => {
+export const Post: React.FC = (props) => {
+// export const Post =  (props) => {
   const [post, setPost] = useState('')
 
-
+  const search = useSearchParams()
   const data = trpcHook.getAllPost.useQuery()
   const postMutation = trpcHook.addPost.useMutation()
 
   const handleChat = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPost(e.target.value)
   }
-  
-  const location = window.location.search
-  const params = new URLSearchParams(location);
   const addPost = useCallback(() => {
     
     
-    postMutation.mutate({ userId: parseInt(params.get('id'), 10), description: post})
+    postMutation.mutate({ userId: parseInt(search.get('id'), 10), description: post})
     setPost('')
   }, [postMutation])
 
   const postList = useMemo(() => {
     if (data.data && data.data.length > 0) {
       return data.data.map(({ postId, userId, description, date ,user}) => {   
-        return <Feed description={description} date={date} user={user} />
+        return <Feed key={postId} description={description} date={date} user={user} />
       })
     } else {
       return <>No Tweets Found</>

@@ -1,18 +1,18 @@
 'use client'
 
 import { trpcHook } from '@utils/trpcHook'
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import MyProfile from './MyProfile'
 import Tweets from './Tweets'
+import {useSearchParams} from 'next/navigation'
 
 export const Profile = () => {
-  const location = window.location.search
-  const params = new URLSearchParams(location);
-  let data = trpcHook.getUserAndPost.useQuery({userId: parseInt(params.get('id'), 10)})
+  const search = useSearchParams()
+  let data = trpcHook.getUserAndPost.useQuery({userId: parseInt(search.get('id'), 10)})
 
   const postList = useMemo(() => {
     if (data.data && data.data.length > 0) {
-      return <MyProfile user={data.data[0]}/>
+      return <MyProfile key={data.data[0]?.username} user={data.data[0]}/>
     } 
   }, data.data)
 
@@ -20,7 +20,7 @@ export const Profile = () => {
 
     if (data.data && data.data.length > 0) {
       return data.data[0].posts.map(({ postId, userId, description, date}) => {   
-        return <Tweets user={data.data[0]} postId={postId} userId={userId} description={description} date={date}/>
+        return <Tweets key={postId} user={data.data[0]} postId={postId} userId={userId} description={description} date={date}/>
       })
     } else {
       return <>No Tweets Found</>

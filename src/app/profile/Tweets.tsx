@@ -1,6 +1,7 @@
 import { trpcHook } from '@utils/trpcHook'
 
-const Tweets = (tweets) => {
+const Tweets: React.FC = (tweets) => {
+// const Tweets = (tweets) => {
   
   return (
     <div className="mt-2 border-b mb-4">

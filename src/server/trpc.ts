@@ -21,7 +21,7 @@ export const appRouter = t.router({
       where: {
           userId: input.userId,
       },
-      take: -10,
+      take: 10,
       select: {
         description: true,
       },
@@ -30,12 +30,16 @@ export const appRouter = t.router({
   getAllPost : t.procedure
   .query(() => {
     return prisma.postList.findMany({
+      // take: -10,
       select: {
         postId: true,
         userId: true,
         description: true,
         user : true,
         date: true,
+      },
+      orderBy: {
+        date: 'desc'
       },
     })
   }),

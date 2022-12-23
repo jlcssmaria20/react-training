@@ -1,6 +1,6 @@
 import { trpcHook } from '@utils/trpcHook'
 
-const MyProfile = (postList) => {
+const MyProfile: React.FC = (postList) => {
   
   return (
     <div>

@@ -2,11 +2,17 @@ import { Header } from '@organism/Header'
 import './globals.css'
 import { Trpcclient } from './TrpcClient'
 
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const palitanAngMenu = () => {
+    return <Header />;
+  }
+
   return (
     <Trpcclient>
       <html lang="en">
@@ -16,7 +22,12 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.ico" />
         </head>
         <body>
-          <Header />
+          <div>
+          {/* { 
+              palitanAngMenu
+          } */}
+          </div>
+          
           <main className="mx-auto w-pc">{children}</main>
         </body>
       </html>

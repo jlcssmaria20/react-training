@@ -1,6 +1,6 @@
 import { trpcHook } from '@utils/trpcHook'
-
-const Feed = (props) => {
+const Feed: React.FC = (props) => {
+// const Feed = (props) => {
   
   return (
     <article className="mb-2 clear-right border-t border-gray-400 p-2 hover:bg-gray-100 flex flex-wrap items-start cursor-pointer">
